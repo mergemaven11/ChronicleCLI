@@ -1,6 +1,6 @@
 import typer
 import handlers as handler
-import utils as util
+import cli.utils as util
 
 app = typer.Typer()
 
@@ -13,7 +13,7 @@ def add():
     title = typer.prompt("Please enter a title")
     entry = typer.prompt("Please enter your journal entry")
     # Send data to add handler
-    handler.add_entry_to_file({"Title": title, "entry": entry})
+    handler.add_entry_to_file({"Title": title, "Entry": entry})
     
     
 @app.command()
