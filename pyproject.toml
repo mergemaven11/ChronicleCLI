@@ -14,6 +14,26 @@ freezegun = "^1.5.1"
 inquirerpy = "^0.3.4"
 rich = "^13.7.1"
 
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py312']
+exclude = '''
+/(
+    \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | (?!cli|journal\.py$).*  # Exclude everything except cli directory and journal.py
+)/
+'''
 
 [build-system]
 requires = ["poetry-core"]

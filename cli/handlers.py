@@ -24,24 +24,26 @@ def add_entry_to_file(entry_obj: t.Dict[str, t.Any], entries_file: str) -> None:
         None
     """
     # Load existing entries from the file
-    with open(entries_file, 'r') as f:
+    with open(entries_file, "r") as f:
         entries_data: list = json.load(f)
 
     # Generate a unique ID and timestamp for the new entry
-    entry_obj['id'] = str(uuid.uuid4())
-    entry_obj['timestamp'] = utils.current_datetime()
+    entry_obj["id"] = str(uuid.uuid4())
+    entry_obj["timestamp"] = utils.current_datetime()
 
     # Append the new entry object to the existing list
     entries_data.append(entry_obj)
 
     # Write the updated entry data back to the file
-    with open(entries_file, 'w') as f:
+    with open(entries_file, "w") as f:
         json.dump(entries_data, f, indent=4)  # indent for pretty printing
+
 
 # Searching an entry
 
+
 def search_entries(keyword: str):
-    """ Search Entries by title, dropdown selection for multiple finds.  
+    """Search Entries by title, dropdown selection for multiple finds.
 
     View all vs view one
 
@@ -61,18 +63,25 @@ def search_entries(keyword: str):
     # Use InquirerPy to present a dropdown selection
     questions = [
         {
-            'type': 'list',
-            'name': 'selected_entry',
-            'message': "Select an entry to view:",
-            'choices': choices
+            "type": "list",
+            "name": "selected_entry",
+            "message": "Select an entry to view:",
+            "choices": choices,
         }
     ]
-    
+
     answers = prompt(questions)
-    
+
     # Find the selected entry
-    selected_entry = next((item for item in search_items if f"{item['title']} - {item['timestamp']}" == answers['selected_entry']), None)
-    
+    selected_entry = next(
+        (
+            item
+            for item in search_items
+            if f"{item['title']} - {item['timestamp']}" == answers["selected_entry"]
+        ),
+        None,
+    )
+
     if selected_entry:
         # Pretty-print the selected entry using rich
         console.print("[bold green]Selected Entry:[/bold green]")
@@ -81,8 +90,7 @@ def search_entries(keyword: str):
         console.print("[bold red]No entry selected.[/bold red]")
 
 
-
-# Viewing an entry 
+# Viewing an entry
 
 # Delete Entries
 
