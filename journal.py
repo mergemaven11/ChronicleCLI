@@ -1,6 +1,7 @@
 import typer
-import handlers as handler
-import cli.utils as util
+import cli.handlers as handler
+import cli.utils as util  # pytest works but python journal.py wont
+
 
 app = typer.Typer()
 
@@ -26,8 +27,9 @@ def export(name: str):
     typer.echo(f"Hello {name}")
 
 @app.command()
-def search(name: str):
-    typer.echo(f"Hello {name}")
+def search(keyword: str):        
+    handler.search_entries(keyword)
+
 
     
 @app.command()

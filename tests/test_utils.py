@@ -1,8 +1,8 @@
 import os
 import json
 import pytest
-
 import cli.utils as util
+
 
 
 @pytest.fixture

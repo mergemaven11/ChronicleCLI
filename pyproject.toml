@@ -11,6 +11,8 @@ python = "^3.12"
 typer = "^0.12.3"
 pytest = "^8.2.0"
 freezegun = "^1.5.1"
+inquirerpy = "^0.3.4"
+rich = "^13.7.1"
 
 
 [build-system]

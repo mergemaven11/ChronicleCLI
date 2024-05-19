@@ -1,22 +1,24 @@
 import os
 import json
+import re
+import typing as t
+
 from datetime import datetime, timezone
 
+ENTRIES_DIR = './entries'
+ENTRIES_FILE = './entries/entries.json'
 
 def check_entries_dir():
     """
     Check if entries directory is present, and if not, create the directory and an initial JSON file.
     """
-    entries_dir = './entries'
-    entries_file = './entries/entries.json'
-
-    if not os.path.exists(entries_dir):
-        os.makedirs(entries_dir)
-        with open(entries_file, 'w') as f:
+    if not os.path.exists(ENTRIES_DIR):
+        os.makedirs(ENTRIES_DIR)
+        with open(ENTRIES_FILE, 'w') as f:
             # Create an empty array to store entries initially
             json.dump([], f)
 
-    return entries_file
+    return ENTRIES_FILE
 
 
 
@@ -31,4 +33,31 @@ def current_datetime():
     formatted_datetime = utc_datetime.strftime("%m/%d/%Y @ %I:%M:%S %p")
 
     return formatted_datetime
+
+
+def search(keyword: str) -> t.List[t.Dict[str, str]]:
+    """Pass a keyword in, uses regex to search the JSON file for entries.
+
+    Args:
+        keyword (str): Keyword used to query JSON file.
+    
+    Returns:
+        search_data (List): List of entries matching the keyword.
+
+    TODO: - Fix permissions issue
+    """
+    search_data = []
+    
+    if os.path.exists(ENTRIES_DIR):
+        with open(ENTRIES_DIR, 'r') as file:
+            entries = json.load(file)
+            
+            for entry in entries:
+                if re.search(keyword, entry['title'], re.IGNORECASE) or re.search(keyword, entry['content'], re.IGNORECASE):
+                    search_data.append(entry)
+
+    if not search_data:
+        print(f"There are no entries with keyword: {keyword}")
+    
+    return search_data
 

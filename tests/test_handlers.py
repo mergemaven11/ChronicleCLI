@@ -4,7 +4,7 @@ import pytest
 from uuid import UUID
 from datetime import datetime
 
-import cli.handlers as handler
+import cli.handlers as handler # TODO: fix packging issue
 
 @pytest.fixture
 def temp_entries_file(tmp_path):
