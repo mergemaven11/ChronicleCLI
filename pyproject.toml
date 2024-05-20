@@ -17,13 +17,15 @@ rich = "^13.7.1"
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
 pylint = "^3.2.1"
+autopep8 = "^2.1.0"
+pre-commit = "^3.7.1"
 
 [tool.pylint]
 disable = ["C0114", "C0115", "C0116"]  # Disable missing module, class, and function docstrings
 
 [tool.black]
 line-length = 88
-target-version = ['py38', 'py39', 'py312']
+target-version = ['py38', 'py39', 'py311']
 exclude = '''
 /(
     \.git

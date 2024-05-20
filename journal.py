@@ -1,7 +1,7 @@
 import typer
+
 import cli.handlers as handler
 import cli.utils as util  # pytest works but python journal.py wont
-
 
 app = typer.Typer()
 

@@ -1,7 +1,6 @@
 import json
-import uuid
 import typing as t
-
+import uuid
 
 from InquirerPy import prompt
 from rich import print_json
@@ -58,7 +57,9 @@ def search_entries(keyword: str):
         return
 
     # Create a list of choices for the dropdown
-    choices = [f"{entry['title']} - {entry['timestamp']}" for entry in search_items]
+    choices = [
+        f"{entry['title']} - {entry['timestamp']}" for entry in search_items
+    ]  # type: ignore
 
     # Use InquirerPy to present a dropdown selection
     questions = [
