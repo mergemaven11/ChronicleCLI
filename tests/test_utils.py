@@ -1,8 +1,9 @@
-import os
 import json
-import pytest
-import cli.utils as util
+import os
 
+import pytest
+
+import cli.utils as util
 
 
 @pytest.fixture
@@ -12,7 +13,8 @@ def temp_entries_env(tmp_path):
     """
     original_dir = os.getcwd()
     temp_dir = tmp_path / "entries_test"
-    temp_dir.mkdir(parents=True, exist_ok=True)  # Create directory if it doesn't exist
+    # Create directory if it doesn't exist
+    temp_dir.mkdir(parents=True, exist_ok=True)
 
     # Change the current directory to the temp directory
     os.chdir(temp_dir)
@@ -23,11 +25,12 @@ def temp_entries_env(tmp_path):
     # After the test, restore the original working directory
     os.chdir(original_dir)
 
+
 def test_check_entries_dir(temp_entries_env):
     """Test the check_entries_dir function."""
 
-    entries_dir = './entries'
-    entries_file = './entries/entries.json'
+    entries_dir = "./entries"
+    entries_file = "./entries/entries.json"
 
     # Call the function to check and create the directory and file
     result_file = util.check_entries_dir()
@@ -41,7 +44,7 @@ def test_check_entries_dir(temp_entries_env):
     assert os.path.isfile(entries_file)
 
     # Verify the file content is an empty list
-    with open(entries_file, 'r') as f:
+    with open(entries_file, "r") as f:
         content = json.load(f)
     assert content == []
 

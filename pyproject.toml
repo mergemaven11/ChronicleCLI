@@ -7,13 +7,39 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.10"
 typer = "^0.12.3"
 pytest = "^8.2.0"
 freezegun = "^1.5.1"
 inquirerpy = "^0.3.4"
 rich = "^13.7.1"
 
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+pylint = "^3.2.1"
+autopep8 = "^2.1.0"
+pre-commit = "^3.7.1"
+
+[tool.pylint]
+disable = ["C0114", "C0115", "C0116"]  # Disable missing module, class, and function docstrings
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py311']
+exclude = '''
+/(
+    \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | (?!cli|journal\.py$).*  # Exclude everything except cli directory and journal.py
+)/
+'''
 
 [build-system]
 requires = ["poetry-core"]

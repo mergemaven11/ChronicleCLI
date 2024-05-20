@@ -1,3 +1,7 @@
 entries
 __pycache__
 poetry_venv
+*.tmp
+*.cache
+*.pyc
+.vscode/
