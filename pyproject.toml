@@ -23,6 +23,13 @@ pre-commit = "^3.7.1"
 [tool.pylint]
 disable = ["C0114", "C0115", "C0116"]  # Disable missing module, class, and function docstrings
 
+[tool.mypy]
+mypy_path = ["./chronicle_cli"]
+explicit_package_bases = true
+python_version = "3.12"
+plugins = []
+
+
 [tool.black]
 line-length = 88
 target-version = ['py38', 'py39', 'py311']
