@@ -1,6 +1,9 @@
 name: Code Quality
 
-on: [push]
+on:
+  push:
+    branches:
+      - main  # Adjust the branch as needed
 
 jobs:
   build:
@@ -9,27 +12,27 @@ jobs:
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.12"]
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Poetry
-      run: |
-        curl -sSL https://install.python-poetry.org | python -
-        export PATH="$HOME/.local/bin:$PATH"
-    - name: Install dependencies
-      run: |
-        poetry install
-    - name: Run isort
-      run: |
-        poetry run isort $(git ls-files '*.py')
-    - name: Run black
-      run: |
-        poetry run black .
-    - name: Run autopep8
-      run: |
-        poetry run autopep8 --in-place $(git ls-files '*.py')
-    - name: Analysing the code with pylint
-      run: |
-        poetry run pylint --disable=C0103 $(git ls-files '*.py')
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python -
+          export PATH="$HOME/.local/bin:$PATH"
+      - name: Install dependencies
+        run: |
+          poetry install
+      - name: Run isort
+        run: |
+          poetry run isort $(git ls-files '*.py')
+      - name: Run black
+        run: |
+          poetry run black .
+      - name: Run autopep8
+        run: |
+          poetry run autopep8 --in-place $(git ls-files '*.py')
+      - name: Analysing the code with pylint
+        run: |
+          poetry run pylint --disable=C0103 $(git ls-files '*.py')

@@ -1,3 +1,6 @@
+"""
+Module containing handlers for the CLI commands.
+"""
 import json
 import typing as t
 import uuid
@@ -23,7 +26,7 @@ def add_entry_to_file(entry_obj: t.Dict[str, t.Any], entries_file: str) -> None:
         None
     """
     # Load existing entries from the file
-    with open(entries_file, "r") as f:
+    with open(entries_file, "r", encoding="utf-8") as f:
         entries_data: list = json.load(f)
 
     # Generate a unique ID and timestamp for the new entry
@@ -34,7 +37,7 @@ def add_entry_to_file(entry_obj: t.Dict[str, t.Any], entries_file: str) -> None:
     entries_data.append(entry_obj)
 
     # Write the updated entry data back to the file
-    with open(entries_file, "w") as f:
+    with open(entries_file, "w", encoding="utf-8") as f:
         json.dump(entries_data, f, indent=4)  # indent for pretty printing
 
 
