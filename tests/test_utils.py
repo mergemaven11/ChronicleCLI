@@ -1,13 +1,14 @@
+"""Module for testing all utils"""
 import json
 import os
 
 import pytest
 
-import cli.utils as util
+from ..cli import utils as util
 
 
 @pytest.fixture
-def temp_entries_env(tmp_path):
+def temp_entries_env(tmp_path):  # pylint: disable=W0621
     """
     Fixture to create a temporary directory for entries.
     """
@@ -26,7 +27,7 @@ def temp_entries_env(tmp_path):
     os.chdir(original_dir)
 
 
-def test_check_entries_dir(temp_entries_env):
+def test_check_entries_dir(temp_entries_env):  # pylint: disable=W0621,W0613
     """Test the check_entries_dir function."""
 
     entries_dir = "./entries"
@@ -44,7 +45,7 @@ def test_check_entries_dir(temp_entries_env):
     assert os.path.isfile(entries_file)
 
     # Verify the file content is an empty list
-    with open(entries_file, "r") as f:
+    with open(entries_file, "r", encoding="utf-8") as f:
         content = json.load(f)
     assert content == []
 

@@ -1,15 +1,17 @@
+"""
+Module to test cli handlers
+"""
+
 import json
-import os
-from datetime import datetime
 from uuid import UUID
 
 import pytest
 
-import cli.handlers as handler  # TODO: fix packging issue
+from ..cli import handlers as handler
 
 
 @pytest.fixture
-def temp_entries_file(tmp_path):
+def temp_entries_file(tmp_path):  # pylint: disable=W0621
     """
     Fixture to create a temporary file for entries.
     """
@@ -17,15 +19,15 @@ def temp_entries_file(tmp_path):
     entries_dir.mkdir()
 
     # Create 'entries.json' file with an empty list
-    entries_file = entries_dir / "entries.json"
-    with open(entries_file, "w") as f:
+    file_path = entries_dir / "entries.json"
+    with open(file_path, "w", encoding="utf-8") as f:
         json.dump([], f)
 
-    print("Temporary entries file created:", entries_file)  # Add debug output
-    return entries_file
+    print("Temporary entries file created:", file_path)  # Add debug output
+    return file_path
 
 
-def test_add_entry_to_file(temp_entries_file):
+def test_add_entry_to_file(temp_entries_file):  # pylint: disable=W0621
     """Test add entry to file handler."""
 
     entry_data = {"title": "foo bar", "content": "Lorem ipsum"}
@@ -34,7 +36,7 @@ def test_add_entry_to_file(temp_entries_file):
     handler.add_entry_to_file(entry_data, entries_file=str(temp_entries_file))
 
     # Load the entries from the file
-    with open(temp_entries_file, "r") as f:
+    with open(temp_entries_file, "r", encoding="utf-8") as f:
         entries = json.load(f)
 
     # Check if one entry was added

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "chroniclecli"
+name = "chronicle_cli"
 version = "0.1.0"
 description = "ChronicleCLI is a command-line application for keeping a personal journal"
 authors = ["Scott <38087336+mergemaven11@users.noreply.github.com>"]
