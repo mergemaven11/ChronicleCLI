@@ -26,7 +26,7 @@ poetry install
 Once installed, you can start using ChronicleCLI by running the journal.py script.
 
 ```bash
-python journal.py
+python -m journal
 ```
 
 ## Commands
