@@ -4,8 +4,11 @@ Entry point module that consist of all the CLI commands
 
 import typer
 
-from .cli import handlers as handler
-from .cli import utils as util
+from cli import handlers as handler
+from cli import utils as util
+
+# from .cli import handlers as handler
+
 
 app = typer.Typer()
 
@@ -32,7 +35,7 @@ def add(entries_file: str):  # Add entries_file as an argument
     entry = typer.prompt("Please enter your journal entry")
     # Send data to add handler
     handler.add_entry_to_file(
-        entries_file, {"Title": title, "Entry": entry}
+        entries_file=entries_file, entry_obj={"Title": title, "Entry": entry}
     )  # Pass entries_file argument
 
 
