@@ -1,4 +1,5 @@
 """Module for testing all utils"""
+
 import json
 import os
 
