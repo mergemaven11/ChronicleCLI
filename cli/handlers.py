@@ -1,6 +1,7 @@
 """
 Module containing handlers for the CLI commands.
 """
+
 import json
 import typing as t
 import uuid
@@ -14,7 +15,9 @@ from . import utils
 console = Console()
 
 
-def add_entry_to_file(entry_obj: t.Dict[str, t.Any], entries_file: str) -> None:
+def add_entry_to_file(
+    entry_obj: t.Dict[str, t.Any], entries_file: str = utils.ENTRIES_FILE
+) -> None:
     """
     Add a JSON object representing a journal entry to the entries file.
 
@@ -39,6 +42,11 @@ def add_entry_to_file(entry_obj: t.Dict[str, t.Any], entries_file: str) -> None:
     # Write the updated entry data back to the file
     with open(entries_file, "w", encoding="utf-8") as f:
         json.dump(entries_data, f, indent=4)  # indent for pretty printing
+        console.print(
+            f"[bold green]Successfully added the following entry:[/bold green]\n"
+            f"{json.dumps(entry_obj, indent=4)}",
+            style="green",
+        )
 
 
 # Searching an entry

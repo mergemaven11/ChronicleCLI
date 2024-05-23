@@ -17,26 +17,28 @@ app = typer.Typer()
 
 
 # Add imported commands to the main Typer application instance
-@app.command()
-def add(entries_file: str):  # Add entries_file as an argument
+@app.command(name="add", short_help="Add a new entry to your journal.")
+def add():  # Add title as an argument
     """
     Adds a new journal entry.
 
     Prompts the user to enter a title and a journal entry.
     Sends the data to the add handler to be added to the file.
 
-    Parameters:
-        entries_file (str): Path to the entries file.
-
     Returns:
         None
     """
     title = typer.prompt("Please enter a title")
     entry = typer.prompt("Please enter your journal entry")
-    # Send data to add handler
-    handler.add_entry_to_file(
-        entries_file=entries_file, entry_obj={"Title": title, "Entry": entry}
-    )  # Pass entries_file argument
+    confirm = typer.confirm("Do you want to add this entry?")
+
+    if confirm:
+        # Send data to add handler
+        handler.add_entry_to_file(
+            entry_obj={"Title": title, "Entry": entry}
+        )  # Pass entries_file argument
+    else:
+        typer.echo("Entry Discarded!")
 
 
 # @app.command()
