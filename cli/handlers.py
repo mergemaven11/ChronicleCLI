@@ -5,6 +5,9 @@ Module containing handlers for the CLI commands.
 import json
 import typing as t
 import uuid
+import os
+import pandas as pd
+import datetime
 
 from InquirerPy import prompt
 from rich import print_json
@@ -109,3 +112,31 @@ def search_entries(keyword: str):
 # Edit Entries
 
 # Export Entries
+
+def export_entries(filetype: str, path: str):
+    """ Export Journal Entries to chosen filetype (csv, pdf or docv)
+
+    Args:
+        filetype (str): csv, pdf or docv
+    """
+    if filetype.lower() not in ("csv", "pdf", "docv"):
+       console.print(f"[bold red]{filetype} is not supported![/bold red]")
+    
+    if os.path.exists(path):
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        if filetype.lower() == "csv":
+            with open("./entries/entries.json", encoding='utf-8') as input_file:
+               df = pd.read_json(input_file)
+            df.to_csv(f"{path}/{timestamp}.csv",encoding='utf-8', index=False)
+            console.print("[bold green]csv file created successfully![/bold green]")
+            pass
+        elif filetype.lower() == "pdf":
+            pass
+        elif filetype.lower() == "docv":
+            pass
+    else:
+        console.print(f"[bold red]{path} doesn't exist![/bold red]")
+
+
+    
+

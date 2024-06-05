@@ -64,3 +64,4 @@ def test_add_entry_to_file(temp_entries_file):  # pylint: disable=W0621
         assert entry["timestamp"] is not None
     except ValueError:
         pytest.fail("Timestamp is empty")
+
