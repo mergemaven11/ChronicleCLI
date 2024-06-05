@@ -46,9 +46,21 @@ def add():  # Add title as an argument
 #     typer.echo(f"Hello {name}")
 
 
-# @app.command()
-# def export(name: str):
-#     typer.echo(f"Hello {name}")
+@app.command()
+def export():
+    """ Export journal to a file
+
+    AC filetypes: csv, pdf and docv 
+    """
+
+    filetype = typer.prompt("Enter a export file type (csv, pdf or docv)")
+    path = typer.prompt("Enter file destination dir (c://<path>)")
+    confrim = typer.confirm(f"Create the following?:\nPath: {filetype}?\nDestination: {path}")
+
+    if confrim:
+        handler.export_entries(filetype, path)
+    else:
+        typer.echo("File not created.")
 
 
 # @app.command()

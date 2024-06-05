@@ -13,6 +13,7 @@ pytest = "^8.2.0"
 freezegun = "^1.5.1"
 inquirerpy = "^0.3.4"
 rich = "^13.7.1"
+pandas = "^2.2.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
